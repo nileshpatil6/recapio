@@ -1,0 +1,79 @@
+@import "tailwindcss";
+
+@theme inline {
+  --color-bg: #0f0f1a;
+  --color-bg2: #12122a;
+  --color-bg3: #1a1a3a;
+  --color-bg4: #1e1e42;
+  --color-border: rgba(123, 127, 255, 0.12);
+  --color-border2: rgba(123, 127, 255, 0.22);
+  --color-accent: #7b7fff;
+  --color-accent2: #5050cc;
+  --color-text: #ccccee;
+  --color-text2: #8888aa;
+  --color-text3: #555577;
+  --color-red: #ff5555;
+  --color-green: #44ff88;
+  --color-yellow: #ffaa44;
+}
+
+body {
+  background: var(--color-bg);
+  color: var(--color-text);
+  font-family: 'Segoe UI', system-ui, sans-serif;
+}
+
+.field-input {
+  width: 100%;
+  background: var(--color-bg3);
+  border: 1px solid var(--color-border);
+  border-radius: 8px;
+  padding: 10px 12px;
+  color: var(--color-text);
+  font-size: 14px;
+  outline: none;
+}
+.field-input:focus {
+  border-color: var(--color-border2);
+}
+
+.btn-primary {
+  background: var(--color-accent);
+  color: #fff;
+  border: none;
+  border-radius: 8px;
+  padding: 11px;
+  font-size: 14px;
+  font-weight: 600;
+  cursor: pointer;
+}
+.btn-primary:hover {
+  background: var(--color-accent2);
+}
+.btn-primary:disabled {
+  opacity: 0.6;
+  cursor: default;
+}
+
+.btn-secondary {
+  background: var(--color-bg3);
+  color: var(--color-text);
+  border: 1px solid var(--color-border);
+  border-radius: 8px;
+  padding: 8px 14px;
+  font-size: 13px;
+  cursor: pointer;
+}
+.btn-secondary:hover {
+  border-color: var(--color-border2);
+}
+
+.textbox {
+  background: var(--color-bg2);
+  border: 1px solid var(--color-border);
+  border-radius: 10px;
+  padding: 16px;
+  font-size: 14px;
+  line-height: 1.6;
+  white-space: pre-wrap;
+}
