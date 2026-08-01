@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self'; style-src 'self' 'unsafe-inline';" />
+  <title>VoiceNotes</title>
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+  <div class="bar" id="bar">
+    <div class="drag-handle" id="drag"></div>
+
+    <div class="top-row">
+      <span class="dot" id="dot">●</span>
+      <span class="app-name" id="appName">VoiceNotes AI</span>
+      <div class="win-controls">
+        <button class="ctrl-btn" id="openMain" title="Open Notes">⊞</button>
+        <button class="ctrl-btn close" id="closeBtn" title="Hide">×</button>
+      </div>
+    </div>
+
+    <div class="bottom-row">
+      <button class="rec-btn" id="recBtn">⏺ Start</button>
+      <span class="timer" id="timer">00:00</span>
+      <span class="hint" id="hint">Win+Shift+N</span>
+    </div>
+  </div>
+
+  <script src="app.js"></script>
+</body>
+</html>

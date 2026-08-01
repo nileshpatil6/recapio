@@ -1,0 +1,121 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self'; style-src 'self' 'unsafe-inline'; font-src 'self' data:;" />
+  <title>VoiceNotes AI</title>
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+
+<!-- Title bar -->
+<div class="titlebar" id="titlebar">
+  <div class="titlebar-title">
+    <span class="titlebar-dot">●</span> VoiceNotes AI
+  </div>
+  <div class="titlebar-controls">
+    <button class="tb-btn" id="btnMin">─</button>
+    <button class="tb-btn" id="btnMax">□</button>
+    <button class="tb-btn close" id="btnClose">×</button>
+  </div>
+</div>
+
+<!-- Main layout -->
+<div class="layout">
+
+  <!-- Sidebar -->
+  <aside class="sidebar">
+    <div class="sidebar-header">
+      <input class="search-input" id="searchInput" placeholder="Search notes..." type="text" />
+    </div>
+
+    <div class="notes-list" id="notesList">
+      <div class="empty-list">No recordings yet.<br/>Press Win+Shift+N to start.</div>
+    </div>
+
+    <div class="sidebar-footer">
+      <button class="ai-search-btn" id="aiSearchBtn">✦ Ask across all notes</button>
+      <button class="settings-btn" id="settingsBtn">⚙ Settings</button>
+    </div>
+  </aside>
+
+  <!-- Content -->
+  <main class="content" id="content">
+    <div class="empty-state" id="emptyState">
+      <div class="empty-icon">🎙</div>
+      <div class="empty-title">No note selected</div>
+      <div class="empty-sub">Press <kbd>Win+Shift+N</kbd> from any app to start recording</div>
+    </div>
+  </main>
+</div>
+
+<!-- Settings Modal -->
+<div class="modal-overlay hidden" id="settingsModal">
+  <div class="modal">
+    <div class="modal-header">
+      <span>Settings</span>
+      <button class="modal-close" id="settingsClose">×</button>
+    </div>
+    <div class="modal-body">
+      <label class="field-label">Gemini API Key <span class="field-hint">(<a href="#" id="getKeyLink">Get free key ↗</a>)</span></label>
+      <input type="password" class="field-input" id="apiKeyInput" placeholder="AIza..." />
+
+      <label class="field-label" style="margin-top:16px">Global Hotkey</label>
+      <input type="text" class="field-input" id="hotkeyInput" placeholder="CommandOrControl+Shift+N" />
+      <div class="field-note">Restart app to apply hotkey changes.</div>
+
+      <label class="field-label" style="margin-top:16px">Record</label>
+      <div class="checkbox-row">
+        <label><input type="checkbox" id="chkMic" /> Microphone</label>
+        <label><input type="checkbox" id="chkSystem" /> System audio (calls, apps)</label>
+      </div>
+
+      <hr style="border-color:var(--border); margin:20px 0;" />
+
+      <label class="field-label">Cloud Sync (Supabase)</label>
+      <input type="text" class="field-input" id="supabaseUrlInput" placeholder="https://xxxx.supabase.co" />
+      <input type="password" class="field-input" id="supabaseKeyInput" placeholder="Anon public key" style="margin-top:8px" />
+      <div class="field-note">Get these from your Supabase project → Settings → API. Same account works on the website.</div>
+
+      <div id="authLoggedOut" style="margin-top:12px">
+        <input type="email" class="field-input" id="authEmail" placeholder="Email" />
+        <input type="password" class="field-input" id="authPassword" placeholder="Password" style="margin-top:8px" />
+        <div class="checkbox-row" style="margin-top:10px; gap:8px;">
+          <button class="btn-secondary" id="authSignInBtn">Log In</button>
+          <button class="btn-secondary" id="authSignUpBtn">Sign Up</button>
+        </div>
+        <div class="field-note" id="authError" style="color:var(--red)"></div>
+      </div>
+
+      <div id="authLoggedIn" class="hidden" style="margin-top:12px">
+        <div class="field-note">Signed in as <strong id="authEmailLabel"></strong>. Notes are syncing to the cloud.</div>
+        <button class="btn-secondary" id="authSignOutBtn" style="margin-top:8px">Log Out</button>
+      </div>
+    </div>
+    <div class="modal-footer">
+      <button class="btn-secondary" id="settingsCancel">Cancel</button>
+      <button class="btn-primary" id="settingsSave">Save Settings</button>
+    </div>
+  </div>
+</div>
+
+<!-- AI Search Modal -->
+<div class="modal-overlay hidden" id="aiModal">
+  <div class="modal modal-wide">
+    <div class="modal-header">
+      <span>✦ Ask Across All Notes</span>
+      <button class="modal-close" id="aiClose">×</button>
+    </div>
+    <div class="modal-body">
+      <div class="ai-search-row">
+        <input type="text" class="field-input" id="aiQuery" placeholder="What was decided about the project deadline?" />
+        <button class="btn-primary" id="aiAsk">Ask</button>
+      </div>
+      <div class="ai-result" id="aiResult">Results will appear here...</div>
+    </div>
+  </div>
+</div>
+
+<script src="app.js"></script>
+</body>
+</html>

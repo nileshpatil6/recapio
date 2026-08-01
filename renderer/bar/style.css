@@ -1,0 +1,140 @@
+* { margin: 0; padding: 0; box-sizing: border-box; user-select: none; }
+
+body {
+  background: transparent;
+  font-family: 'Segoe UI', sans-serif;
+  overflow: hidden;
+}
+
+.bar {
+  width: 290px;
+  height: 76px;
+  background: rgba(18, 18, 42, 0.96);
+  border: 1px solid rgba(123, 127, 255, 0.25);
+  border-radius: 14px;
+  backdrop-filter: blur(20px);
+  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.6), 0 0 0 1px rgba(255,255,255,0.04);
+  padding: 8px 12px 8px 12px;
+  position: relative;
+  overflow: hidden;
+}
+
+.bar::before {
+  content: '';
+  position: absolute;
+  top: 0; left: 0; right: 0;
+  height: 1px;
+  background: linear-gradient(90deg, transparent, rgba(123,127,255,0.4), transparent);
+}
+
+.drag-handle {
+  position: absolute;
+  top: 0; left: 0; right: 0;
+  height: 100%;
+  cursor: move;
+  z-index: 0;
+}
+
+.top-row, .bottom-row {
+  display: flex;
+  align-items: center;
+  position: relative;
+  z-index: 1;
+  pointer-events: none;
+}
+
+.top-row { margin-bottom: 6px; }
+
+.dot {
+  font-size: 9px;
+  color: #7b7fff;
+  margin-right: 6px;
+  transition: color 0.3s;
+}
+.dot.recording { color: #ff4444; animation: pulse 1s infinite; }
+
+@keyframes pulse {
+  0%, 100% { opacity: 1; }
+  50% { opacity: 0.3; }
+}
+
+.app-name {
+  font-size: 11px;
+  font-weight: 700;
+  color: #9b9fff;
+  flex: 1;
+  letter-spacing: 0.02em;
+  transition: color 0.3s;
+}
+
+.win-controls {
+  display: flex;
+  gap: 2px;
+  pointer-events: all;
+}
+
+.ctrl-btn {
+  background: none;
+  border: none;
+  color: #444466;
+  font-size: 14px;
+  cursor: pointer;
+  width: 22px;
+  height: 22px;
+  border-radius: 4px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: color 0.2s, background 0.2s;
+  line-height: 1;
+}
+.ctrl-btn:hover { color: #aaaacc; background: rgba(255,255,255,0.06); }
+.ctrl-btn.close:hover { color: #ff6666; }
+
+.bottom-row { gap: 10px; pointer-events: all; }
+
+.rec-btn {
+  background: #2a2a7a;
+  border: 1px solid rgba(123,127,255,0.3);
+  color: #aaaaff;
+  font-size: 11px;
+  font-weight: 700;
+  font-family: 'Segoe UI', sans-serif;
+  padding: 5px 14px;
+  border-radius: 7px;
+  cursor: pointer;
+  transition: all 0.2s;
+  white-space: nowrap;
+}
+.rec-btn:hover { background: #3a3aaa; border-color: #7b7fff; color: #fff; }
+.rec-btn.recording { background: #7a1a1a; border-color: rgba(255,80,80,0.4); color: #ffaaaa; }
+.rec-btn.recording:hover { background: #aa2222; }
+
+.timer {
+  font-family: 'Consolas', 'Courier New', monospace;
+  font-size: 13px;
+  font-weight: 700;
+  color: #6666cc;
+  min-width: 40px;
+  transition: color 0.3s;
+}
+.timer.recording { color: #ff8888; }
+
+.hint {
+  margin-left: auto;
+  font-size: 9px;
+  color: #333355;
+  font-family: 'Segoe UI', sans-serif;
+  transition: opacity 0.3s;
+}
+
+/* Status states */
+.bar.processing .app-name { color: #ffaa44; }
+.bar.done .app-name { color: #44ff88; }
+.bar.error .app-name { color: #ff6666; }
+
+/* Glow on record */
+.bar.recording-active {
+  box-shadow: 0 8px 32px rgba(0,0,0,0.6), 0 0 20px rgba(255,60,60,0.15), 0 0 0 1px rgba(255,255,255,0.04);
+  border-color: rgba(255,80,80,0.3);
+}
